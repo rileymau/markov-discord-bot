@@ -84,6 +84,7 @@ async def on_message(message):
  
         
     if message.content.startswith('$Give us some dating advice!$'):
+        await message.channel.send("I'm glad you asked!")
         await message.channel.send(make_text(chains))
     
     return(message)
