@@ -2,6 +2,8 @@
 
 import sys
 from random import choice
+import os
+import discord
 
 
 def open_and_read_file(filenames):
@@ -64,4 +66,33 @@ text = open_and_read_file(filenames)
 
 # Get a Markov chain
 chains = make_chains(text)
+
+'''the next day'''
+
+client = discord.Client()
+
+
+@client.event
+async def on_ready():
+    print(f'Successfully connected! Logged in as {client.user}.')
+    
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        print(message)
+ 
+        
+    if message.content.startswith('$Give us some dating advice!$'):
+        await message.channel.send(make_text(chains))
+    
+    return(message)
+
+token = os.environ['DISCORD_TOKEN']
+
+client.run(token)
+
+#speak = on_message(chains)
+
+#print(speak)
 
